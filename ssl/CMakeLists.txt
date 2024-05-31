@@ -49,6 +49,13 @@ target_include_directories( ssl PUBLIC ${PROJECT_BINARY_DIR}/include )
 
 target_link_libraries( ssl crypto )
 
+target_compile_definitions(ssl
+  PRIVATE
+  $<$<BOOL:${OPENSSL_NO_ERR}>:OPENSSL_NO_ERR>
+  $<$<BOOL:${OPENSSL_NO_FILENAMES}>:OPENSSL_NO_FILENAMES>
+  $<$<BOOL:${OPENSSL_NO_CRYPTO_MDEBUG}>:OPENSSL_NO_CRYPTO_MDEBUG>
+)
+
 set_target_properties( ssl PROPERTIES
   VERSION "${LIB_VERSION}" SOVERSION "${LIB_SOVERSION}" )
 

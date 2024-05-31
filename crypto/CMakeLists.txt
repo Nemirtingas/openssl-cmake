@@ -293,6 +293,13 @@ else()
   endif()
 endif()
 
+target_compile_definitions(crypto
+  PRIVATE
+  $<$<BOOL:${OPENSSL_NO_ERR}>:OPENSSL_NO_ERR>
+  $<$<BOOL:${OPENSSL_NO_FILENAMES}>:OPENSSL_NO_FILENAMES>
+  $<$<BOOL:${OPENSSL_NO_CRYPTO_MDEBUG}>:OPENSSL_NO_CRYPTO_MDEBUG>
+)
+
 set_target_properties( crypto PROPERTIES
   VERSION "${LIB_VERSION}" SOVERSION "${LIB_SOVERSION}" )
 
